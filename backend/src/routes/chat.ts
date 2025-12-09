@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { firestore } from '../config/firebase';
-import authMiddleware from '../middlewares/auth';
+import authMiddleware, { AuthedRequest } from '../middlewares/auth';
 
 const router = Router();
 const chatsCol = firestore.collection('chats');
@@ -131,7 +131,7 @@ router.post('/', authMiddleware, async (req: any, res) => {
   }
 });
 
-router.get('/:id/messages', authMiddleware, async (req, res) => {
+router.get('/:id/messages', authMiddleware, async (req: AuthedRequest, res) => {
   try {
     const chatDoc = await chatsCol.doc(req.params.id).get();
     if (!chatDoc.exists) return res.status(404).json({ error: 'Chat not found' });
