@@ -1,0 +1,46 @@
+services:
+  - type: web
+    name: reparts-backend
+    env: node
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm run build && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: FIREBASE_PROJECT_ID
+        fromDatabase:
+          name: firebase
+          property: projectId
+      - key: FIREBASE_PRIVATE_KEY
+        fromDatabase:
+          name: firebase
+          property: privateKey
+      - key: FIREBASE_CLIENT_EMAIL
+        fromDatabase:
+          name: firebase
+          property: clientEmail
+      - key: ALGOLIA_APP_ID
+        fromDatabase:
+          name: algolia
+          property: appId
+      - key: ALGOLIA_ADMIN_KEY
+        fromDatabase:
+          name: algolia
+          property: adminKey
+      - key: ALGOLIA_LISTINGS_INDEX
+        value: reparts_listings
+      - key: CLOUDINARY_CLOUD_NAME
+        fromDatabase:
+          name: cloudinary
+          property: cloudName
+      - key: CLOUDINARY_API_KEY
+        fromDatabase:
+          name: cloudinary
+          property: apiKey
+      - key: CLOUDINARY_API_SECRET
+        fromDatabase:
+          name: cloudinary
+          property: apiSecret
