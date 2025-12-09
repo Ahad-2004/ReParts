@@ -1,9 +1,8 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "installCommand": "cd frontend && npm install",
+  "outputDirectory": "frontend/dist",
   "framework": "vite",
-  "envPrefix": "VITE_",
-  "installCommand": "npm install",
   "env": {
     "VITE_FIREBASE_API_KEY": "@firebase_api_key",
     "VITE_FIREBASE_AUTH_DOMAIN": "@firebase_auth_domain",
@@ -13,5 +12,12 @@
     "VITE_FIREBASE_APP_ID": "@firebase_app_id",
     "VITE_FIREBASE_MEASUREMENT_ID": "@firebase_measurement_id",
     "VITE_API_URL": "@api_url"
-  }
+  },
+  "regions": ["iad1"],
+  "routes": [
+    {
+      "src": "/.*",
+      "dest": "/index.html"
+    }
+  ]
 }
